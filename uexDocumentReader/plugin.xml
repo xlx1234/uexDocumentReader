@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<uexplugins>
+    <plugin
+         className="org.zywx.wbpalmstar.plugin.uexdocument.EUExDocumentReader"
+         uexName="uexDocumentReader" version="3.0" build="0">
+        <method name="openDocumentReader"/>
+        <method name="close"/>
+    </plugin>
+    
+</uexplugins>
