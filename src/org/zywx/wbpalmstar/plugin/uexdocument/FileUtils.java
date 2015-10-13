@@ -73,7 +73,7 @@ public class FileUtils {
 			}
 
 		} catch (Exception e) {
-			toast((Activity) ctx,"文件不存在或文件路径错误");
+			toast((Activity) ctx,EUExUtil.getString("plugin_uexDocumentReader_file_not_exist_or_path_error"));
 			e.printStackTrace();
 			return null;
 		}
