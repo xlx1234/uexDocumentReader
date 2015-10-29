@@ -7,7 +7,6 @@ import org.zywx.wbpalmstar.engine.universalex.EUExBase;
 import org.zywx.wbpalmstar.engine.universalex.EUExUtil;
 
 import android.app.Activity;
-import android.app.ActivityGroup;
 import android.app.ProgressDialog;
 import android.content.ActivityNotFoundException;
 import android.content.Context;
@@ -45,7 +44,7 @@ public class EUExDocumentReader extends EUExBase {
 
 	private void openDocumentByThrid(final File file) {
 		if (!file.exists()) {
-	        ((ActivityGroup) mContext).runOnUiThread(new Runnable() {
+	        ((Activity) mContext).runOnUiThread(new Runnable() {
 	            @Override
 	            public void run() {
 	                Toast.makeText(mContext,

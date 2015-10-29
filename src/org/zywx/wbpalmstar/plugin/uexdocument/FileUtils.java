@@ -10,7 +10,6 @@ import org.zywx.wbpalmstar.engine.EBrowserView;
 import org.zywx.wbpalmstar.engine.universalex.EUExUtil;
 
 import android.app.Activity;
-import android.app.ActivityGroup;
 import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.res.Resources;
@@ -38,7 +37,7 @@ public class FileUtils {
 	}
 
 	public static void toast(final Activity activity, final String msg) {
-        ((ActivityGroup) activity).runOnUiThread(new Runnable() {
+        ((Activity) activity).runOnUiThread(new Runnable() {
             @Override
             public void run() {
                 Toast.makeText(activity, msg, Toast.LENGTH_SHORT).show();
