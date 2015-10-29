@@ -44,7 +44,14 @@ public class EUExDocumentReader extends EUExBase {
 
 	private void openDocumentByThrid(final File file) {
 		if (!file.exists()) {
-			Toast.makeText(mContext,  EUExUtil.getString("plugin_uexDocumentReader_file_not_exist"), Toast.LENGTH_SHORT).show();
+	        ((Activity) mContext).runOnUiThread(new Runnable() {
+	            @Override
+	            public void run() {
+	                Toast.makeText(mContext,
+	                        EUExUtil.getString("plugin_uexDocumentReader_file_not_exist"),
+	                        Toast.LENGTH_SHORT).show();
+	            }
+	        });
 			return;
 		}
 
@@ -86,19 +93,18 @@ public class EUExDocumentReader extends EUExBase {
 				dialog.dismiss();
 			}
 
-			if (result == null) {
-				return;
-			}
-			File file = new File(result);
-			if (file.exists()) {
-				openDocumentByThrid(file);
-			} else {
-				FileUtils.showToast((Activity) mContext, EUExUtil.getString("plugin_uexDocumentReader_file_not_exist"));
+			if (result != null)
+			{
+				File file = new File(result);
+				if (file.exists()) {
+				    openDocumentByThrid(file);
+				} else {
+				    FileUtils.showToast((Activity) mContext,
+				            EUExUtil.getString("plugin_uexDocumentReader_file_not_exist"));
+				}
 			}
 			fileTask = null;
-
 		}
-
 	}
 
 	@Override
