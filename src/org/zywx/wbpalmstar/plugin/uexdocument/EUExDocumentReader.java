@@ -7,6 +7,7 @@ import org.zywx.wbpalmstar.engine.universalex.EUExBase;
 import org.zywx.wbpalmstar.engine.universalex.EUExUtil;
 
 import android.app.Activity;
+import android.app.ActivityGroup;
 import android.app.ProgressDialog;
 import android.content.ActivityNotFoundException;
 import android.content.Context;
@@ -44,7 +45,14 @@ public class EUExDocumentReader extends EUExBase {
 
 	private void openDocumentByThrid(final File file) {
 		if (!file.exists()) {
-			Toast.makeText(mContext,  EUExUtil.getString("plugin_uexDocumentReader_file_not_exist"), Toast.LENGTH_SHORT).show();
+	        ((ActivityGroup) mContext).runOnUiThread(new Runnable() {
+	            @Override
+	            public void run() {
+	                Toast.makeText(mContext,
+	                        EUExUtil.getString("plugin_uexDocumentReader_file_not_exist"),
+	                        Toast.LENGTH_SHORT).show();
+	            }
+	        });
 			return;
 		}
 
@@ -86,19 +94,18 @@ public class EUExDocumentReader extends EUExBase {
 				dialog.dismiss();
 			}
 
-			if (result == null) {
-				return;
-			}
-			File file = new File(result);
-			if (file.exists()) {
-				openDocumentByThrid(file);
-			} else {
-				FileUtils.showToast((Activity) mContext, EUExUtil.getString("plugin_uexDocumentReader_file_not_exist"));
+			if (result != null)
+			{
+				File file = new File(result);
+				if (file.exists()) {
+				    openDocumentByThrid(file);
+				} else {
+				    FileUtils.showToast((Activity) mContext,
+				            EUExUtil.getString("plugin_uexDocumentReader_file_not_exist"));
+				}
 			}
 			fileTask = null;
-
 		}
-
 	}
 
 	@Override

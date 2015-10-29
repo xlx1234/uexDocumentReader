@@ -10,6 +10,7 @@ import org.zywx.wbpalmstar.engine.EBrowserView;
 import org.zywx.wbpalmstar.engine.universalex.EUExUtil;
 
 import android.app.Activity;
+import android.app.ActivityGroup;
 import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.res.Resources;
@@ -36,13 +37,17 @@ public class FileUtils {
 		return context.getString(EUExUtil.getResStringID(resKey));
 	}
 
-	public static void toast(Activity activity, final String msg) {
-		Toast.makeText(activity, msg, Toast.LENGTH_SHORT).show();
+	public static void toast(final Activity activity, final String msg) {
+        ((ActivityGroup) activity).runOnUiThread(new Runnable() {
+            @Override
+            public void run() {
+                Toast.makeText(activity, msg, Toast.LENGTH_SHORT).show();
+            }
+        });
 	}
 
 	public static String assetToSd(Context ctx, String inFileName,
 			String outFileName) {
-		int total = 0;
 		try {
 			InputStream is = ctx.getAssets().open(inFileName);
 			if (is == null) {
@@ -65,7 +70,6 @@ public class FileUtils {
 				int len = 0;
 				while ((len = is.read(buf)) != -1) {
 					fos.write(buf, 0, len);
-					total += len;
 				}
 				is.close();
 				fos.close();
@@ -73,7 +77,8 @@ public class FileUtils {
 			}
 
 		} catch (Exception e) {
-			toast((Activity) ctx,EUExUtil.getString("plugin_uexDocumentReader_file_not_exist_or_path_error"));
+			toast((Activity) ctx,
+			        EUExUtil.getString("plugin_uexDocumentReader_file_not_exist_or_path_error"));
 			e.printStackTrace();
 			return null;
 		}
@@ -81,7 +86,6 @@ public class FileUtils {
 	}
 
 	public static byte[] assetToByte(Context ctx, String inFileName) {
-		int total = 0;
 		try {
 			InputStream is = ctx.getAssets().open(inFileName);
 			if (is == null) {
@@ -92,7 +96,6 @@ public class FileUtils {
 			int len = 0;
 			while ((len = is.read(buf)) != -1) {
 				baos.write(buf, 0, len);
-				total += len;
 			}
 			is.close();
 			baos.close();
