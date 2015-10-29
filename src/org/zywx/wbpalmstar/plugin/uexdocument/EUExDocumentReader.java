@@ -4,6 +4,7 @@ import java.io.File;
 
 import org.zywx.wbpalmstar.engine.EBrowserView;
 import org.zywx.wbpalmstar.engine.universalex.EUExBase;
+import org.zywx.wbpalmstar.engine.universalex.EUExUtil;
 
 import android.app.Activity;
 import android.app.ProgressDialog;
@@ -43,7 +44,7 @@ public class EUExDocumentReader extends EUExBase {
 
 	private void openDocumentByThrid(final File file) {
 		if (!file.exists()) {
-			Toast.makeText(mContext, "文件不存在", Toast.LENGTH_SHORT).show();
+			Toast.makeText(mContext,  EUExUtil.getString("plugin_uexDocumentReader_file_not_exist"), Toast.LENGTH_SHORT).show();
 			return;
 		}
 
@@ -92,7 +93,7 @@ public class EUExDocumentReader extends EUExBase {
 			if (file.exists()) {
 				openDocumentByThrid(file);
 			} else {
-				FileUtils.showToast((Activity) mContext, "文件不存在");
+				FileUtils.showToast((Activity) mContext, EUExUtil.getString("plugin_uexDocumentReader_file_not_exist"));
 			}
 			fileTask = null;
 

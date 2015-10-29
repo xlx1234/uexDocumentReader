@@ -47,4 +47,7 @@
     <string name="platform_myspace_loading">加载中...</string>
     <string name="platform_myspace_tap_to_refresh">点击刷新推荐列表</string>
 
+    <string name="plugin_uexDocumentReader_file_not_exist">文件不存在</string>
+    <string name="plugin_uexDocumentReader_file_not_exist_or_path_error">文件不存在或文件路径错误</string>
+
 </resources>
